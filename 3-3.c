@@ -23,7 +23,7 @@ int main() {
     int hasLine = FALSE;
     
     int i;
-    for (i = 0; i < strlen(line); ++i) {
+    for (i = 0; i < strlen(line) - 1; ++i) {
         char curr = line[i];
         char next = line[i + 1];
         
