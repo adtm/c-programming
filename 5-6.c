@@ -1,7 +1,7 @@
 //
 //  5-6. Rewrite appropriate programs from earlier chapters and exercises with pointers
-//  instead of array indexing. Good possibilities include getline (Chapters 1 and 4), atoi, itoa, and
-//  their variants (Chapters 2, 3, and 4), reverse (Chapter 3), and strindex and getop (Chapter 4).
+//  instead of array indexing. Good possibilities include [x]getline (Chapters 1 and 4), [x]atoi, [x]itoa, and
+//  their variants (Chapters 2, 3, and 4), [x]reverse (Chapter 3), and [x]strindex and getop (Chapter 4).
 //
 
 #include <stdio.h>
@@ -11,11 +11,18 @@
 
 int getLine(char *array);
 void reverse(char *array);
+int strIndex(char *source, char value);
+void intToStr(int number, char *string);
+int strToInt(char *array);
 
 int main() {
     
-    char arr[LENGTH] = "abcd";
-    reverse(arr);
+    int number = 1234;
+    char stringNumber[LENGTH];
+    intToStr(number, stringNumber);
+    
+    char string[LENGTH] = "1234";
+    printf("%d conversion", strToInt(string));
     
     return 0;
 }
@@ -44,4 +51,51 @@ void reverse(char *start) {
         *end-- = temp;
     }
     
+}
+
+int strIndex(char *start, char value) {
+    
+    char *temp;
+    temp = start;
+    
+    while(*start != '\0') {
+        
+        if (*start == value)
+            return (int)(start - temp);
+        
+        *start++;
+    }
+    return -1;
+}
+
+
+void intToStr(int number, char *start) {
+    
+    char *end;
+    end = start + strlen(start);
+    
+    int digit;
+    while (number > 0) {
+        digit = number % 10;
+        *end-- = digit + '0';
+        
+        number = number / 10;
+    }
+}
+
+int strToInt(char *start) {
+    
+    int num, *end;
+    
+    num = 0;
+    end = start + strlen(start) - 1;
+    
+    while (start <= end) {
+        int digit = *start - '0';
+        num = num * 10 + digit;
+        
+        *start++;
+    }
+    
+    return num;
 }
